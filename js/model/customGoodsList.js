@@ -26,6 +26,6 @@ CustomGoodsList.prototype.addGoodsNumber = function (id) {
         var customGoods = new CustomGoods(item, 1);
         _allCustomGoodsList.push(customGoods);
     }
-    
+
     localStorage.setItem('customGoodsList',JSON.stringify(_allCustomGoodsList));
 }
