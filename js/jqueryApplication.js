@@ -1,7 +1,7 @@
 $('document').ready(function(){
     $('#goodsList').on('click','button', function(){
         console.log('enter jquery');
-        console.log($(this).id);
+        console.log($(this)[0].id);
     var cartGoodsNumber = $('#cartGoodsNumber').text();
     cartGoodsNumber++;
     $('#cartGoodsNumber').text(cartGoodsNumber);
@@ -20,7 +20,7 @@ $('document').ready(function(){
                 '<div class="caption">' +
                 '<h3>' + goods.name + '</h3>' +
                 '<p>单价：' + goods.price + '(元) </p>' +
-                '<p><button id="' + goods.id + 'Add"  class="btn btn-primary" role="button">加入购物车</button></p>' +
+                '<p><button id="' + goods.id + '"  class="btn btn-primary" role="button">加入购物车</button></p>' +
                 '</div>' +
                 '</div>' +
                 '</div>'
