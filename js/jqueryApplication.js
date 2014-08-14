@@ -2,10 +2,12 @@ $('document').ready(function(){
     $('#goodsList').on('click','button', function(){
         console.log('enter jquery');
         console.log($(this)[0].id);
+        var customGoodsList = new CustomGoodsList();
+        customGoodsList.addGoodsNumber($(this)[0].id);
+
     var cartGoodsNumber = $('#cartGoodsNumber').text();
     cartGoodsNumber++;
     $('#cartGoodsNumber').text(cartGoodsNumber);
-
     });
 
     var cartGoodsNumber = $('#cartGoodsNumber').text();
