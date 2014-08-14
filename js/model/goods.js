@@ -1,5 +1,7 @@
-function Goods(name, price, unit){
+function Goods(id, name, unit, price, catagary){
+    this.id = id;
     this.name = name;
-    this.price = price;
     this.unit = unit;
+    this.price = price;
+    this.catagary = catagary;
 }
