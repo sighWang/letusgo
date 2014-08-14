@@ -19,51 +19,53 @@
 <nav class="navbar navbar-default" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">LET US GO SHOP</a>
+            <a class="navbar-brand" href="index.html">LET US GO SHOP</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="#">LIST</a></li>
+                <li><a href="goodsList.html">LIST</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">CART(1)</a></li>
+                <li>
+                    <span class="glyphicon glyphicon-shopping-cart"></span><a href="cart.html">CART(1)</a>
+                </li>
             </ul>
         </div>
 </nav>
 <div class="container">
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
         <!-- Default panel contents -->
-        <div class="panel-heading">< LET  US GO 商店>购物清单</div>
+        <div class="panel-heading">< LET  US GO 商店>购物账单</div>
 
         <!-- Table -->
-        <table class="table">
-            <div class=" col-lg-offset-1 col-md-1">打印时间：2014 09 12 09:11:11</div>
+        <div class="panel-body">
+          <table class="table">
+            <div class="col-md-5">打印时间：2014 09 12 09:11:11</div>
             <tbody>
                 <tr>
-                    <td>名称：</td><td>雪碧</td>
-                    <td>数量</td><td>5瓶</td>
-                    <td>单价</td><td>3.00(元)</td>
-                    <td>小计</td><td>2.00(元）</td>
+                    <th>名称：</th>
+                    <th>数量</th>
+                    <th>单价</th>
+                    <th>小计</th>
+                </tr>
+                <tr>
+                    <td>雪碧</td>
+                    <td>5瓶</td>
+                    <td>3.00(元)</td>
+                    <td>15.00(元）</td>
+                </tr>
+                <tr>
+                    <td>荔枝</td>
+                    <td>2斤</td>
+                    <td>5.00(元)</td>
+                    <td>30.00(元)</td>
                 </tr>
             </tbody>
-
-
-            '打印时间：' + formattedDateString + '\n' +
-            '----------------------\n' +
-            '名称：雪碧，数量：5瓶，单价：3.00(元)，小计：12.00(元)\n' +
-            '名称：荔枝，数量：2斤，单价：15.00(元)，小计：30.00(元)\n' +
-            '名称：方便面，数量：3袋，单价：4.50(元)，小计：9.00(元)\n' +
-            '----------------------\n' +
-            '挥泪赠送商品：\n' +
-            '名称：雪碧，数量：1瓶\n' +
-            '名称：方便面，数量：1袋\n' +
-            '----------------------\n' +
-            '总计：51.00(元)\n' +
-            '节省：7.50(元)\n' +
-            '**********************';
-        </table>
+          </table>
+        <p class="text-right">总计：45.00(元)<a class="btn btn-primary btn-lg" role="button" href="#">立即付款</a></p>
+        </div>
     </div>
 </div>
 </body>
