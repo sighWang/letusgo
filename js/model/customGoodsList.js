@@ -20,7 +20,7 @@ CustomGoodsList.prototype.addGoodsNumber = function (id) {
         _allCustomGoodsList[index].number++;
     }
     else{
-        var goodsList = JSON.parse(getGoodslist());
+        var goodsList = getGoodslist();
         var item = _.find(goodsList,{'id':id});
         var customGoods = new CustomGoods(item, 1);
         _allCustomGoodsList.push(customGoods);

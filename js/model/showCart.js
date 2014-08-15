@@ -16,7 +16,7 @@ $('document').ready(function (){
             $('.panel-body').append(
                 '<div class="row">' +
                     '<div class="col-lg-offset-2 col-md-1">' + customItem.goods.name + '</div>' +
-                    ' <div class="col-md-1">' + customItem.number + '</div> ' +
+                    ' <div class="col-md-1" id="'+ customItem.goods.id+'number">' + customItem.number + '</div> ' +
                     '<div class="col-md-1">' + customItem.goods.price + '</div>' +
                     '<div class="col-md-1">' +  customItem.number * customItem.goods.price+ '</div>' +
                     '<div class="col-md-1"><button id="' + customItem.goods.id +'_Add">加</button></div>' +
@@ -27,6 +27,7 @@ $('document').ready(function (){
         })
 
     });
+
     $('.panel-body').append(
     '<div class="row">' +
             '<div class="col-lg-offset-9 col-md-2">' +
@@ -42,15 +43,17 @@ $('document').ready(function (){
         '</div>'
     );
     $('.panel').on('click','button',function() {
-        console.log($(this)[0].id);
         var action = ($(this)[0].id).split('_');
+        var customGoodsService = new CustomGoodsService();
         if(action[1] === 'Add'){
-            console.log(action[0]);
-            addGoodsNumberById(action[0]);
+            var number = customGoodsService.addGoodsNumberById(action[0]);
+            console.log($(this)[0].id);
+            console.log(number);
+            $('#' + action[0] + 'number').text(number);
         }
         else if(action[1] === 'Minus'){
-            minusGoodsNumberById(action[0]);
-
+            var number = customGoodsService.minusGoodsNumberById(action[0]);
+            $('#' + action[0] + 'number').text(number);
         }
     });
 });
