@@ -23,11 +23,8 @@ $('document').ready(function(){
                 '</div>'
         );
     })
-    var cartNumber = 0;
-    var customGoodsList =  getCustomGoodsList();
-    _.forEach(customGoodsList, function(customGoods) {
-        cartNumber += customGoods.number;
-    })
-    $('#cartGoodsNumber').text(cartNumber);
+    var customGoodsService = new CustomGoodsService();
+    console.log(customGoodsService.countCart());
+    $('#cartGoodsNumber').text(customGoodsService.countCart());
 
 });

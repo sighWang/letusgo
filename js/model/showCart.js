@@ -1,12 +1,11 @@
 $('document').ready(function (){
     var allCustomGoodsList = getCustomGoodsList();
-    console.log(allCustomGoodsList);
     var groups = _.groupBy(allCustomGoodsList,function (customGoods){
            return customGoods.goods.catagary;
     });
     _.forEach(Object.keys(groups), function(catagary) {
         $('.panel-body').append(
-                '<div class="row">' +
+                '<div id="' + catagary+ '" class="row">' +
                 '<div class=" col-lg-offset-2 col-md-2">' +
                 '<p>分类:'+ catagary +'</p>' +
                 '</div>' +
@@ -25,7 +24,6 @@ $('document').ready(function (){
                 '</div>'
             );
         })
-
     });
 
     $('.panel-body').append(
@@ -42,18 +40,24 @@ $('document').ready(function (){
         '</div>' +
         '</div>'
     );
+
     $('.panel').on('click','button',function() {
         var action = ($(this)[0].id).split('_');
         var customGoodsService = new CustomGoodsService();
         if(action[1] === 'Add'){
             var number = customGoodsService.addGoodsNumberById(action[0]);
-            console.log($(this)[0].id);
-            console.log(number);
             $('#' + action[0] + 'number').text(number);
         }
         else if(action[1] === 'Minus'){
             var number = customGoodsService.minusGoodsNumberById(action[0]);
+            if(number === -1){
+                $('#' + action[0] + 'row').remove();
+            }
             $('#' + action[0] + 'number').text(number);
         }
     });
+
+    var customGoodsService = new CustomGoodsService();
+    console.log(customGoodsService.countCart());
+    $('#cartGoodsNumber').text(customGoodsService.countCart());
 });

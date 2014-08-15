@@ -29,9 +29,14 @@ CustomGoodsService.prototype.minusGoodsNumberById = function (id){
             index = i;
         }
     }
-    if(index !== -1){
+    if(index !== -1 && customGoodsList[index].number >= 0){
+
         customGoodsList[index].number--;
     }
+    else{
+        return -1;
+    }
+
     this.editCustomGoodsList(customGoodsList);
 
     return customGoodsList[index].number;
@@ -44,4 +49,12 @@ CustomGoodsService.prototype.getGoodsNumberById = function (id){
             index = i;
         }
     }
+}
+CustomGoodsService.prototype.countCart = function (){
+    var cartNumber = 0;
+    var customGoodsList =  this.customGoodsList;
+    _.forEach(customGoodsList, function(customGoods) {
+        cartNumber += customGoods.number;
+    })
+    return cartNumber;
 }
