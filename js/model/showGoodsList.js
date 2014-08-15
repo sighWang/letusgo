@@ -1,19 +1,14 @@
 $('document').ready(function(){
     $('#goodsList').on('click','button', function(){
-        console.log('enter jquery');
-        console.log($(this)[0].id);
         var customGoodsList = new CustomGoodsList();
         customGoodsList.addGoodsNumber($(this)[0].id);
+        var cartGoodsNumber = $('#cartGoodsNumber').text();
+        cartGoodsNumber++;
+        $('#cartGoodsNumber').text(cartGoodsNumber);
+     });
 
-    var cartGoodsNumber = $('#cartGoodsNumber').text();
-    cartGoodsNumber++;
-    $('#cartGoodsNumber').text(cartGoodsNumber);
-    });
-
-    var cartGoodsNumber = $('#cartGoodsNumber').text();
-    cartGoodsNumber++;
-    goodslocalStorage();
-    var goodsList = JSON.parse(localStorage.getItem('goodsList'));
+    initlocalStorage();
+    var goodsList = getGoodslist();
     $('#cartGoodsNumber').text(cartGoodsNumber);
     _.forEach(goodsList, function(goods){
         $('#goodsList').append(
@@ -29,7 +24,7 @@ $('document').ready(function(){
         );
     })
     var cartNumber = 0;
-    var customGoodsList =  JSON.parse(localStorage.getItem('customGoodsList'));
+    var customGoodsList =  getCustomGoodsList();
     _.forEach(customGoodsList, function(customGoods) {
         cartNumber += customGoods.number;
     })

@@ -1,5 +1,5 @@
 function CustomGoodsList(){
-    this.allCustomGoodsList = JSON.parse(localStorage.getItem('customGoodsList'));
+    this.allCustomGoodsList = getCustomGoodsList();
 }
 CustomGoodsList.prototype.getCustomItemsById = function (id){
 //    var _allCustomGoodsList = this.allCustomGoodsList;
@@ -14,18 +14,16 @@ CustomGoodsList.prototype.addGoodsNumber = function (id) {
         if(_.contains(_allCustomGoodsList[i].goods, id)){
             index = i;
         }
-
     }
 
     if(index !== -1){
         _allCustomGoodsList[index].number++;
     }
     else{
-        var goodsList = JSON.parse(localStorage.getItem('goodsList'));
+        var goodsList = JSON.parse(getGoodslist());
         var item = _.find(goodsList,{'id':id});
         var customGoods = new CustomGoods(item, 1);
         _allCustomGoodsList.push(customGoods);
     }
-
-    localStorage.setItem('customGoodsList',JSON.stringify(_allCustomGoodsList));
+    setCustomGoodsList(_allCustomGoodsList);
 }

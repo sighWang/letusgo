@@ -1,8 +1,9 @@
 $('document').ready(function (){
-    var allCustomGoodsList = JSON.parse(localStorage.getItem('customGoodsList'));
+    var allCustomGoodsList = getCustomGoodsList();
     $('.table').prepend(
         '<div class="col-md-5">' + moment().format('YYYY年MM月DD日 HH:mm:ss') + '</div>'
     );
+
     $('.table-body').prepend(
         '<tr>' +
         '<th>名称：</th>' +
@@ -10,6 +11,7 @@ $('document').ready(function (){
         '<th>单价</th>' +
         '<th>小计</th>' +
         '</tr>');
+
     _.forEach(allCustomGoodsList, function(customGoods){
         $('.table-body').append(
                 '<tr>' +

@@ -1,4 +1,4 @@
-function goodslocalStorage(){
+function initlocalStorage(){
     var goodsList = [];
     var cocacola =new Goods('ITEM000000', '可口可乐', '瓶', 3.00, 'drink');
     var sprite = new Goods('ITEM000001', '雪碧', '瓶', 3.00,  'drink');
@@ -9,4 +9,13 @@ function goodslocalStorage(){
 
     var customItemList = [];
     localStorage.setItem('customGoodsList', JSON.stringify(customItemList));
+}
+function getGoodslist() {
+    return JSON.parse(localStorage.getItem('goodsList'));
+}
+function getCustomGoodsList() {
+    return JSON.parse(localStorage.getItem('customGoodsList'));
+}
+function setCustomGoodsList(customGoodsList){
+    localStorage.setItem('customGoodsList',JSON.stringify(customGoodsList));
 }
