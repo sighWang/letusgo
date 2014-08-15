@@ -8,7 +8,9 @@ function initlocalStorage(){
     localStorage.setItem('goodsList', JSON.stringify(goodsList));
 
     var customItemList = [];
-    localStorage.setItem('customGoodsList', JSON.stringify(customItemList));
+    if(localStorage.getItem('customGoodsList') === null) {
+        localStorage.setItem('customGoodsList', JSON.stringify(customItemList));
+    }
 }
 function getGoodslist() {
     return JSON.parse(localStorage.getItem('goodsList'));
