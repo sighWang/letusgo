@@ -6,7 +6,8 @@ $('document').ready(function(){
      });
 
     initlocalStorage();
-    var goodsList = getGoodslist();
+    var cartService = new CartService();
+    var goodsList = cartService.getGoodslist();
     _.forEach(goodsList, function(goods){
         $('#goodsList').append(
                 '<div class="col-md-3">' +
@@ -23,7 +24,6 @@ $('document').ready(function(){
         );
     })
 
-    var cartService = new CartService();
     $('#cartGoodsNumber').text(cartService.countCart());
 
 });

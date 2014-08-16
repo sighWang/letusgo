@@ -1,5 +1,6 @@
 $('document').ready(function (){
-    var allCustomGoodsList = getCustomGoodsList();
+    var cartService = new CartService();
+    var allCustomGoodsList = cartService.getCustomGoodsList();
     var groups = _.groupBy(allCustomGoodsList,function (customGoods){
            return customGoods.goods.catagary;
     });
@@ -7,7 +8,10 @@ $('document').ready(function (){
         showCategaryTitle(catagary);
         showCategaryContent(groups,catagary);
     })
+
     showSubtotal(allCustomGoodsList);
+    var cartService = new CartService();
+    $('#cartGoodsNumber').text(cartService.countCart());
 
     $('.panel').on('click','button',function() {
         var action = ($(this)[0].id).split('_');
@@ -24,10 +28,9 @@ $('document').ready(function (){
             $('#' + action[0] + 'number').text(number);
         }
         $('#cartGoodsNumber').text(cartService.countCart());
+        $('#total').text(cartService.getTotal());
     });
-    showSubtotal(allCustomGoodsList);
-    var cartService = new CartService();
-    $('#cartGoodsNumber').text(cartService.countCart());
+
 });
 
 function showCategaryTitle(catagary){
@@ -67,7 +70,7 @@ function showSubtotal(allCustomGoodsList){
             '<div class="thumbnail">' +
             '<div class="caption">' +
             '<p class="right">' +
-            '<a href="#" class="btn btn-default" role="button">' + total + '</a>' +
+            '<a id="total" href="#" class="btn btn-default" role="button">总计' + cartService.getTotal() + '  元</a>' +
             '<a href="pay.html" class="btn btn-primary" role="button">PAY</a>' +
             '</p>' +
             '</div>' +

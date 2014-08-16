@@ -12,12 +12,3 @@ function initlocalStorage(){
         localStorage.setItem('customGoodsList', JSON.stringify(customItemList));
     }
 }
-function getGoodslist() {
-    return JSON.parse(localStorage.getItem('goodsList'));
-}
-function getCustomGoodsList() {
-    return JSON.parse(localStorage.getItem('customGoodsList'));
-}
-function setCustomGoodsList(customGoodsList){
-    localStorage.setItem('customGoodsList',JSON.stringify(customGoodsList));
-}
