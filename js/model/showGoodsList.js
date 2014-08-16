@@ -1,8 +1,8 @@
 $('document').ready(function(){
     $('#goodsList').on('click','button', function(){
-        var customGoodsList = new CustomGoodsList();
-        customGoodsList.addGoodsNumber($(this)[0].id);
-        $('#cartGoodsNumber').text(customGoodsService.countCart());
+        var cartService = new CartService();
+        cartService.addGoodsNumberById($(this)[0].id);
+        $('#cartGoodsNumber').text(cartService.countCart());
      });
 
     initlocalStorage();
@@ -23,7 +23,7 @@ $('document').ready(function(){
         );
     })
 
-    var customGoodsService = new CustomGoodsService();
-    $('#cartGoodsNumber').text(customGoodsService.countCart());
+    var cartService = new CartService();
+    $('#cartGoodsNumber').text(cartService.countCart());
 
 });

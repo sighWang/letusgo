@@ -1,16 +1,16 @@
-function CustomGoodsService(){
+function CartService(){
     this.customGoodsList = JSON.parse(localStorage.getItem('customGoodsList'));
 }
 
-CustomGoodsService.prototype.getCustomGoodsList = function (){
+CartService.prototype.getCustomGoodsList = function (){
     return this.customGoodsList;
 }
 
-CustomGoodsService.prototype.editCustomGoodsList = function (customGoodsList){
+CartService.prototype.editCustomGoodsList = function (customGoodsList){
     localStorage.setItem('customGoodsList',JSON.stringify(customGoodsList));
 }
 
-CustomGoodsService.prototype.addGoodsNumberById = function (id){
+CartService.prototype.addGoodsNumberById = function (id){
     var index = -1;
     var customGoodsList = this.customGoodsList;
     for (var i = 0; i < customGoodsList.length; i++){
@@ -25,7 +25,7 @@ CustomGoodsService.prototype.addGoodsNumberById = function (id){
     return customGoodsList[index].number;
 }
 
-CustomGoodsService.prototype.minusGoodsNumberById = function (id){
+CartService.prototype.minusGoodsNumberById = function (id){
     var index = -1;
     var customGoodsList = this.customGoodsList;
     for (var i = 0; i < customGoodsList.length; i++){
@@ -34,7 +34,7 @@ CustomGoodsService.prototype.minusGoodsNumberById = function (id){
         }
     }
 
-    if(index !== -1 && customGoodsList[index].number >= 0){
+    if(index !== -1 && customGoodsList[index].number > 0){
         customGoodsList[index].number--;
     }
     else{
@@ -46,7 +46,7 @@ CustomGoodsService.prototype.minusGoodsNumberById = function (id){
     return customGoodsList[index].number;
 }
 
-CustomGoodsService.prototype.getGoodsNumberById = function (id){
+CartService.prototype.getGoodsNumberById = function (id){
     var _customGoodsList = this.customGoodsList;
     var index = -1;
     for (var i = 0; i < _customGoodsList.length; i++){
@@ -56,7 +56,7 @@ CustomGoodsService.prototype.getGoodsNumberById = function (id){
     }
 }
 
-CustomGoodsService.prototype.countCart = function (){
+CartService.prototype.countCart = function (){
     var cartNumber = 0;
     var customGoodsList =  this.customGoodsList;
     _.forEach(customGoodsList, function(customGoods) {
@@ -65,6 +65,6 @@ CustomGoodsService.prototype.countCart = function (){
     return cartNumber;
 }
 
-CustomGoodsService.prototype.getSubtoatl =function (customGoods){
+CartService.prototype.getSubtoatl =function (customGoods){
     return customGoods.number * customGoods.goods.price;
 }

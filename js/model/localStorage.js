@@ -8,7 +8,7 @@ function initlocalStorage(){
     localStorage.setItem('goodsList', JSON.stringify(goodsList));
 
     var customItemList = [];
-    if(localStorage.getItem('customGoodsList') === null) {
+   if(localStorage.getItem('customGoodsList') === null) {
         localStorage.setItem('customGoodsList', JSON.stringify(customItemList));
     }
 }
