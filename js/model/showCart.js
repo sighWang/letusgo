@@ -1,30 +1,17 @@
 $('document').ready(function (){
-    var cartService = new CartService();
-    var allCustomGoodsList = cartService.getCustomGoodsList();
-    var groups = _.groupBy(allCustomGoodsList,function (customGoods){
-           return customGoods.goods.catagary;
-    });
-    _.forEach(Object.keys(groups), function(catagary) {
-        showCategaryTitle(catagary);
-        showCategaryContent(groups,catagary);
-    })
-
-    showSubtotal(allCustomGoodsList);
-    var cartService = new CartService();
-    $('#cartGoodsNumber').text(cartService.countCart());
-
     $('.panel').on('click','button',function() {
         var action = ($(this)[0].id).split('_');
         var cartService = new CartService();
+
         if(action[1] === 'Add'){
             var number = cartService.addGoodsNumberById(action[0]);
             $('#' + action[0] + 'number').text(number);
         }
+
         else if(action[1] === 'Minus'){
             var number = cartService.minusGoodsNumberById(action[0]);
             if(number === 0){
                 $('#' + action[0] + 'row').remove();
-                console.log($('#' + action[2] + 'row').length);
                 if($('#' + action[2] + 'row').length === 1){
                     $('#' + action[2] + 'row').remove();
                 }
@@ -35,6 +22,18 @@ $('document').ready(function (){
         $('#total').text(cartService.getTotal());
     });
 
+    var cartService = new CartService();
+    var allCustomGoodsList = cartService.getCustomGoodsList();
+    var groups = _.groupBy(allCustomGoodsList,function (customGoods){
+        return customGoods.goods.catagary;
+    });
+    _.forEach(Object.keys(groups), function(catagary) {
+        showCategaryTitle(catagary);
+        showCategaryContent(groups,catagary);
+    })
+    showSubtotal(allCustomGoodsList);
+    $('#cartGoodsNumber').text(cartService.countCart());
+
 });
 
 function showCategaryTitle(catagary){
@@ -42,19 +41,19 @@ function showCategaryTitle(catagary){
             '<div id="' + catagary+ 'row" class="row">' +
             '<div class=" col-lg-offset-2 col-md-2">' +
             '<p>分类:'+ catagary +'</p>' +
-            '</div>' +
             '</div>'
     );
 }
+
 function showCategaryContent(groups,catagary){
     var cartService = new CartService();
     _.forEach(groups[catagary], function(customItem) {
         $('.panel-body').append(
                 '<div id="' + customItem.goods.id +'row" class="row">' +
                 '<div class="col-lg-offset-2 col-md-1">' + customItem.goods.name + '</div>' +
-                '<div class="col-md-1" id="'+ customItem.goods.id+'number">' + customItem.number + '</div> ' +
-                '<div class="col-md-1">' + customItem.goods.price + '</div>' +
-                '<div class="col-md-1">' +  cartService.getSubtoatl(customItem) + '</div>' +
+                '<div class="col-md-1" id="'+ customItem.goods.id+'number">' + customItem.number + customItem.goods.unit + '</div> ' +
+                '<div class="col-md-1">' + customItem.goods.price + '元/' + customItem.goods.unit + '</div>' +
+                '<div class="col-md-1">共' +  cartService.getSubtoatl(customItem) + '  元</div>' +
                 '<div class="col-md-1"><button id="' + customItem.goods.id +'_Add_' + catagary + '">加</button></div>' +
                 '<div class="col-md-1"><button id="' + customItem.goods.id +'_Minus_' + catagary + '">减</button></div>' +
                 '<div class="col-md-1"></div><div class="col-md-1"></div>' +

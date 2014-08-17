@@ -5,7 +5,7 @@ $('document').ready(function(){
         $('#cartGoodsNumber').text(cartService.countCart());
      });
 
-    initlocalStorage();
+    initLocalStorage();
     var cartService = new CartService();
     var goodsList = cartService.getGoodslist();
     _.forEach(goodsList, function(goods){
