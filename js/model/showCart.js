@@ -24,6 +24,10 @@ $('document').ready(function (){
             var number = cartService.minusGoodsNumberById(action[0]);
             if(number === 0){
                 $('#' + action[0] + 'row').remove();
+                console.log($('#' + action[2] + 'row').length);
+                if($('#' + action[2] + 'row').length === 1){
+                    $('#' + action[2] + 'row').remove();
+                }
             }
             $('#' + action[0] + 'number').text(number);
         }
@@ -35,7 +39,7 @@ $('document').ready(function (){
 
 function showCategaryTitle(catagary){
     $('.panel-body').append(
-            '<div id="' + catagary+ '" class="row">' +
+            '<div id="' + catagary+ 'row" class="row">' +
             '<div class=" col-lg-offset-2 col-md-2">' +
             '<p>分类:'+ catagary +'</p>' +
             '</div>' +
@@ -51,8 +55,8 @@ function showCategaryContent(groups,catagary){
                 '<div class="col-md-1" id="'+ customItem.goods.id+'number">' + customItem.number + '</div> ' +
                 '<div class="col-md-1">' + customItem.goods.price + '</div>' +
                 '<div class="col-md-1">' +  cartService.getSubtoatl(customItem) + '</div>' +
-                '<div class="col-md-1"><button id="' + customItem.goods.id +'_Add">加</button></div>' +
-                '<div class="col-md-1"><button id="' + customItem.goods.id +'_Minus">减</button></div>' +
+                '<div class="col-md-1"><button id="' + customItem.goods.id +'_Add_' + catagary + '">加</button></div>' +
+                '<div class="col-md-1"><button id="' + customItem.goods.id +'_Minus_' + catagary + '">减</button></div>' +
                 '<div class="col-md-1"></div><div class="col-md-1"></div>' +
                 '</div>'
         );

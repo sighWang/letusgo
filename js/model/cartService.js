@@ -46,6 +46,12 @@ CartService.prototype.minusGoodsNumberById = function (id){
 
     if(index !== -1 && customGoodsList[index].number > 0){
         customGoodsList[index].number--;
+        if(customGoodsList[index].number === 0){
+            customGoodsList.splice(index);
+            this.editCustomGoodsList(customGoodsList);
+            return 0;
+        }
+
     }
     else{
         return -1;
