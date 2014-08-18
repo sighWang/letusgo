@@ -11,6 +11,14 @@ CartService.prototype.editCustomGoodsList = function (customGoodsList){
     localStorage.setItem('customGoodsList',JSON.stringify(customGoodsList));
 }
 
+CartService.prototype.getCustomGoodsById = function (id) {
+    var customGoodsList = this.customGoodsList;
+    for (var i = 0; i < customGoodsList.length; i++){
+        if(_.contains(customGoodsList[i].goods, id)){
+            return customGoodsList[i];
+        }
+    }
+}
 CartService.prototype.addGoodsNumberById = function (id){
     var index = -1;
     var customGoodsList = this.customGoodsList;

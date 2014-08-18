@@ -11,15 +11,16 @@ $('document').ready(function (){
         else if(action[1] === 'Minus'){
             var number = cartService.minusGoodsNumberById(action[0]);
             if(number === 0){
-                $('#' + action[0] + 'row').remove();
-                if($('#' + action[2] + 'row').length === 1){
-                    $('#' + action[2] + 'row').remove();
-                }
+                doRemove(action);
             }
             $('#' + action[0] + 'number').text(number);
         }
         $('#cartGoodsNumber').text(cartService.countCart());
-        $('#total').text(cartService.getTotal());
+        var customItem = cartService.getCustomGoodsById(action[0]);
+        var subtotal = Util.format.formarPrice(cartService.getSubtoatl(customItem));
+        var total = Util.format.formarPrice(cartService.getTotal());
+        $('#subtotal'+action[0]).text(subtotal);
+        $('#total').text(total);
     });
 
     var cartService = new CartService();
@@ -52,8 +53,8 @@ function showCategaryContent(groups,catagary){
                 '<div id="' + customItem.goods.id +'row" class="row">' +
                 '<div class="col-lg-offset-2 col-md-1">' + customItem.goods.name + '</div>' +
                 '<div class="col-md-1" id="'+ customItem.goods.id+'number">' + customItem.number + customItem.goods.unit + '</div> ' +
-                '<div class="col-md-1">' + customItem.goods.price + '元/' + customItem.goods.unit + '</div>' +
-                '<div class="col-md-1">共' +  cartService.getSubtoatl(customItem) + '  元</div>' +
+                '<div class="col-md-1">' + Util.format.formarPrice(customItem.goods.price) + '元/' + customItem.goods.unit + '</div>' +
+                '<div class="col-md-2">共<span id="subtotal' + customItem.goods.id + '">' +  Util.format.formarPrice(cartService.getSubtoatl(customItem)) + ' </span> 元</div>' +
                 '<div class="col-md-1"><button id="' + customItem.goods.id +'_Add_' + catagary + '">加</button></div>' +
                 '<div class="col-md-1"><button id="' + customItem.goods.id +'_Minus_' + catagary + '">减</button></div>' +
                 '<div class="col-md-1"></div><div class="col-md-1"></div>' +
@@ -61,6 +62,7 @@ function showCategaryContent(groups,catagary){
         );
     })
 }
+
 function showSubtotal(allCustomGoodsList){
     var total = 0;
     var cartService = new CartService();
@@ -72,13 +74,19 @@ function showSubtotal(allCustomGoodsList){
             '<div class="col-lg-offset-9 col-md-2">' +
             '<div class="thumbnail">' +
             '<div class="caption">' +
-            '<p class="right">' +
-            '<a id="total" href="#" class="btn btn-default" role="button">总计' + cartService.getTotal() + '  元</a>' +
-            '<a href="pay.html" class="btn btn-primary" role="button">PAY</a>' +
-            '</p>' +
+            '<span class="right">' +
+            '总计<a id="total" href="#" class="btn btn-default" role="button">' +
+             Util.format.formarPrice(cartService.getTotal()) + '</a>  元' + '<a href="pay.html" class="btn btn-primary btn-lg" role="button">PAY</a>' +
+            '</span>' +
             '</div>' +
             '</div>' +
             '</div>' +
             '</div>'
     );
+}
+function doRemove(action){
+    $('#' + action[0] + 'row').remove();
+    if($('#' + action[2] + 'row').length === 1){
+        $('#' + action[2] + 'row').remove();
+    }
 }
